@@ -4,6 +4,13 @@ npm i -D unplugin-auto-import
 npm install --save-dev @types/node
 npm install antd --save
 
+npm i react-router --save
+
+npm i react-router-dom --save
+
+npm install react-activation --save
+
+
 
 tools:
 npm install --save-dev --save-exact prettier
