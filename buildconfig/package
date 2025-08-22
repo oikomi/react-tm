@@ -2,6 +2,7 @@ package:
 
 npm i -D unplugin-auto-import
 npm install --save-dev @types/node
+npm install antd --save
 
 
 tools:
