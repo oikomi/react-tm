@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <>
       {contextHolder}
-      <h1 className={styles.loginContainer}>{t('login.login')}</h1>
+      <h1 className={styles.container}>{t('login.login')}</h1>
 
       <Form
         name="login"
