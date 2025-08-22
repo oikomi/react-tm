@@ -1,14 +1,12 @@
 import './App.css';
 
 import { HashRouter as Router } from 'react-router-dom';
-import { App as AntApp, ConfigProvider, theme } from 'antd';
+import { App as AntApp, ConfigProvider } from 'antd';
 
 import { AliveScope } from 'react-activation';
 import zhCN from 'antd/es/locale/zh_CN';
 import enUS from 'antd/es/locale/en_US';
-
-// antd主题
-const { defaultAlgorithm, darkAlgorithm } = theme;
+import Login from './pages/login';
 
 function App() {
   const { i18n } = useTranslation();
@@ -20,7 +18,7 @@ function App() {
         <ConfigProvider locale={currentLanguage === 'en' ? enUS : zhCN}>
           <AntApp>
             <AliveScope>
-              <h1>hello</h1>
+              <Login></Login>
             </AliveScope>
           </AntApp>
         </ConfigProvider>

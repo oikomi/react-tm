@@ -7,20 +7,12 @@ import AutoImport from 'unplugin-auto-import/vite';
  */
 export const autoImportPlugin = (): PluginOption => {
   return AutoImport({
-    dirs: [
-      'src/hooks/**',
-      'src/components/**',
-      'src/stores/**',
-      'types/**',
-      'src/utils/permissions.ts',
-      'src/utils/config.ts',
-    ],
+    dirs: ['src/hooks/**', 'src/components/**', 'src/stores/**', 'types/**'],
     imports: [
       'react',
-      'react-router',
       'react-router-dom',
       'react-i18next',
-      { from: 'react', imports: ['FC'], type: true },
+      // { from: 'react', imports: ['FC'], type: true },
     ],
     dts: 'types/autoImports.d.ts',
     include: [/\.[tj]sx?$/],
