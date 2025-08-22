@@ -7,3 +7,5 @@ npm install antd --save
 
 tools:
 npm install --save-dev --save-exact prettier
+
+npm install @ant-design/v5-patch-for-react-19 --save
