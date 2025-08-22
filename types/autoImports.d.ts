@@ -49,6 +49,6 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { FC } from 'react'
-  import('react')
+  export type { FC } from './autoImports.d'
+  import('./autoImports.d')
 }
