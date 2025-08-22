@@ -1,0 +1,8 @@
+package:
+
+npm i -D unplugin-auto-import
+npm install --save-dev @types/node
+
+
+tools:
+npm install --save-dev --save-exact prettier
