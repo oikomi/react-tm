@@ -10,6 +10,8 @@ npm i react-router-dom --save
 
 npm install react-activation --save
 
+npm install react-i18next i18next  --save
+
 
 
 tools:
