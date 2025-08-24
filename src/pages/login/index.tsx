@@ -32,7 +32,20 @@ const Login = () => {
 
       <div className={styles.container}>
         <div className={styles.card}>
-          <div className={styles.left}>left</div>
+          <div className={styles.left}>
+            <span className={styles.sidelogo}>
+              {' '}
+              <img
+                src="https://cdn.casbin.org/img/casdoor-logo_1185x256.png"
+                alt="Casdoor"
+                style={{ width: 120 }}
+              />
+              <span>SSO</span>
+            </span>
+            <div className={styles.img}>
+              <img src="https://cdn.casbin.org/img/casbin.svg" alt="Casdoor" />
+            </div>
+          </div>
           <div className={styles.right}>
             <h1>{t('login.login')}</h1>
             <Form
