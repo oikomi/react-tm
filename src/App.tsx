@@ -6,7 +6,7 @@ import { App as AntApp, ConfigProvider } from 'antd';
 import { AliveScope } from 'react-activation';
 import zhCN from 'antd/es/locale/zh_CN';
 import enUS from 'antd/es/locale/en_US';
-import Login from './pages/login';
+import RouterPage from './router';
 
 function App() {
   const { i18n } = useTranslation();
@@ -18,7 +18,7 @@ function App() {
         <ConfigProvider locale={currentLanguage === 'en' ? enUS : zhCN}>
           <AntApp>
             <AliveScope>
-              <Login></Login>
+              <RouterPage />
             </AliveScope>
           </AntApp>
         </ConfigProvider>
