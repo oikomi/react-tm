@@ -1,6 +1,6 @@
 import { setTitle } from '../../utils/helper.ts';
 
-import { Button, Checkbox, Flex, Form, Input, message } from 'antd';
+import { Button, Checkbox, Flex, Form, type FormProps, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import styles from './index.module.scss';
@@ -24,6 +24,32 @@ const Login = () => {
 
   const onFinish = (values: any) => {
     console.log('Finish:', values);
+    try {
+      // setLoading(true);
+      // const { code, data } = await login(values);
+      // if (Number(code) !== 200) return;
+      // const { token, user, permissions } = data;
+      //
+      // // 处理记住我逻辑
+      // const passwordObj = { value: values.password, expire: 0 };
+      // handleRemember(values.username, encryption(passwordObj));
+      //
+      // if (!permissions?.length || !token) {
+      //   return messageApi.error({ content: t('login.notPermissions'), key: 'permissions' });
+      // }
+      //
+      // setToken(token);
+      // setUserInfo(user);
+      // setPermissions(permissions);
+      // handleGoMenu(permissions);
+    } finally {
+      // setLoading(false);
+    }
+  };
+
+  const handleFinishFailed: FormProps['onFinishFailed'] = (errors) => {
+    console.error('错误信息:', errors);
+    return messageApi.error({ content: errors.values.content, key: 'system' });
   };
 
   return (
@@ -54,6 +80,7 @@ const Login = () => {
               initialValues={{ remember: true }}
               // style={{ maxWidth: 360 }}
               onFinish={onFinish}
+              onFinishFailed={handleFinishFailed}
             >
               <Form.Item
                 name="username"
