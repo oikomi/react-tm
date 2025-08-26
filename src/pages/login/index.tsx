@@ -4,9 +4,13 @@ import { Button, Checkbox, Flex, Form, type FormProps, Input, message } from 'an
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import styles from './index.module.scss';
+import { login } from '../../servers/login';
+import type { LoginData } from '../../models/login';
+import { useToken } from '../../hooks/useToken.ts';
 
 const Login = () => {
   const { t, i18n } = useTranslation();
+  const [getToken, setToken] = useToken();
   const [messageApi, contextHolder] = message.useMessage();
   // 语言切换修改title
   useEffect(() => {
@@ -22,23 +26,27 @@ const Login = () => {
     setClientReady(true);
   }, []);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: LoginData) => {
     console.log('Finish:', values);
     try {
       // setLoading(true);
-      // const { code, data } = await login(values);
-      // if (Number(code) !== 200) return;
-      // const { token, user, permissions } = data;
+
+      // const { data, error, loading } = useRequest(login);
+
+      const { code, data } = await login(values);
+      if (Number(code) !== 200) return;
+
+      const { token, user, permissions } = data;
       //
       // // 处理记住我逻辑
       // const passwordObj = { value: values.password, expire: 0 };
       // handleRemember(values.username, encryption(passwordObj));
       //
-      // if (!permissions?.length || !token) {
-      //   return messageApi.error({ content: t('login.notPermissions'), key: 'permissions' });
-      // }
+      if (!permissions?.length || !token) {
+        return messageApi.error({ content: t('login.notPermissions'), key: 'permissions' });
+      }
       //
-      // setToken(token);
+      setToken(token);
       // setUserInfo(user);
       // setPermissions(permissions);
       // handleGoMenu(permissions);

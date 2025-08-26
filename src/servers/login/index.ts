@@ -1,5 +1,4 @@
 import type { LoginData, LoginResult } from '../../models/login';
-
 import { request } from '../../utils/request.ts';
 
 /**
@@ -7,5 +6,5 @@ import { request } from '../../utils/request.ts';
  * @param data - 请求数据
  */
 export function login(data: LoginData) {
-  return request.post<LoginResult>('/user/login', data);
+  return request.post<LoginResult>('/system/user/login', data);
 }

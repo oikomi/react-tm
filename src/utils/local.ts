@@ -1,5 +1,5 @@
-import { message } from './message';
-import { decryption, encryption } from './crypto';
+import { message } from '../network/message.ts';
+import { decryption, encryption } from '../network/crypto.ts';
 
 /**
  * @description: localStorage封装

@@ -43,6 +43,7 @@ declare global {
   const useSearchParams: typeof import('react-router-dom')['useSearchParams']
   const useState: typeof import('react')['useState']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
+  const useToken: typeof import('../src/hooks/useToken')['useToken']
   const useTransition: typeof import('react')['useTransition']
   const useTranslation: typeof import('react-i18next')['useTranslation']
 }

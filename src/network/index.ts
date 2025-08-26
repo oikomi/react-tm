@@ -1,6 +1,6 @@
 import type { RequestCancel } from './types';
 import { message } from './message';
-import { getLocalInfo, removeLocalInfo } from './local';
+import { getLocalInfo, removeLocalInfo } from '../utils/local.ts';
 import axios from 'axios';
 import AxiosRequest from './request.ts';
 
