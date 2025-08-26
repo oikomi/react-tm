@@ -6,10 +6,19 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { login } from '../../servers/login';
 import type { LoginData } from '../../models/login';
-import { useToken } from '../../hooks/useToken.ts';
+import { useToken } from '../../hooks/useToken';
+import { HOME_PATH } from '../../router';
+import { decryption } from '../../network/crypto';
+
+const CHECK_REMEMBER = 'remember_me';
+const USER_USERNAME = 'login_username';
+const USER_PASSWORD = 'login_password';
 
 const Login = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+
   const [getToken, setToken] = useToken();
   const [messageApi, contextHolder] = message.useMessage();
   // 语言切换修改title
@@ -26,32 +35,51 @@ const Login = () => {
     setClientReady(true);
   }, []);
 
+  useEffect(() => {
+    // 如果存在token，则直接进入页面
+    if (getToken()) {
+      navigate(HOME_PATH);
+    }
+
+    // 如果存在账号密码缓存，则自动填充
+    const username = localStorage.getItem(USER_USERNAME);
+    const password = localStorage.getItem(USER_PASSWORD);
+    if (username && password) {
+      const newPassword = decryption(password);
+      form.setFieldsValue({ username, password: newPassword.value });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onFinish = async (values: LoginData) => {
     console.log('Finish:', values);
     try {
-      // setLoading(true);
+      setLoading(true);
 
-      // const { data, error, loading } = useRequest(login);
+      // const { data, error, loading } = useRequest(loginA);
 
-      const { code, data } = await login(values);
+      const { code, message, data } = await login(values);
       if (Number(code) !== 200) return;
 
       const { token, user, permissions } = data;
-      //
-      // // 处理记住我逻辑
+
+      console.log('login token', token);
+
+      // 处理记住我逻辑
       // const passwordObj = { value: values.password, expire: 0 };
       // handleRemember(values.username, encryption(passwordObj));
-      //
+
       if (!permissions?.length || !token) {
         return messageApi.error({ content: t('login.notPermissions'), key: 'permissions' });
       }
       //
       setToken(token);
+      navigate(HOME_PATH);
       // setUserInfo(user);
       // setPermissions(permissions);
       // handleGoMenu(permissions);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -112,7 +140,7 @@ const Login = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button block type="primary" htmlType="submit">
+                <Button block type="primary" htmlType="submit" loading={isLoading}>
                   Log in
                 </Button>
                 or <a href="">Register now!</a>
