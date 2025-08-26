@@ -1,9 +1,8 @@
 import { type RouteObject } from 'react-router-dom';
-import Main from '../layouts/Main.tsx';
+import Main from '../layouts/Main';
 import Login from '../pages/login';
 import Home from '../pages/home';
-import NotFound from '../pages/404.tsx';
-import Guards from './components/Guards.tsx';
+import NotFound from '../pages/404';
 
 //
 export const HOME_PATH = '/';
@@ -24,10 +23,10 @@ const routerConfig: RouteObject[] = [
       },
     ],
   },
-  {
-    path: '',
-    element: <Guards />,
-  },
+  // {
+  //   path: '',
+  //   element: <Guards />,
+  // },
   {
     path: '*',
     element: <NotFound />,
