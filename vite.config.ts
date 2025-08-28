@@ -9,8 +9,6 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root);
   const viteEnv = handleEnv(env);
   const { VITE_SERVER_PORT, VITE_PROXY } = viteEnv;
-  console.log(VITE_SERVER_PORT);
-  console.log(VITE_PROXY);
 
   return {
     plugins: [react(), createVitePlugins()],

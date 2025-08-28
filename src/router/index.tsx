@@ -4,9 +4,12 @@ import Login from '../pages/login';
 import Home from '../pages/home';
 import NotFound from '../pages/404';
 
+import Chat from '../pages/chat';
+
 //
 export const HOME_PATH = '/';
 export const LOGIN_PATH = 'login';
+export const CHAT_PATH = 'chat';
 
 const routerConfig: RouteObject[] = [
   {
@@ -20,6 +23,10 @@ const routerConfig: RouteObject[] = [
       {
         path: LOGIN_PATH,
         element: <Login />,
+      },
+      {
+        path: CHAT_PATH,
+        element: <Chat />,
       },
     ],
   },

@@ -90,8 +90,6 @@ const Login = () => {
 
   return (
     <>
-      {contextHolder}
-
       <div className={styles.container}>
         <div className={styles.card}>
           <div className={styles.left}>
@@ -135,7 +133,13 @@ const Login = () => {
                   <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>Remember me</Checkbox>
                   </Form.Item>
-                  <a href="">Forgot password</a>
+                  <a
+                    onClick={() => {
+                      navigate(HOME_PATH);
+                    }}
+                  >
+                    Forgot password
+                  </a>
                 </Flex>
               </Form.Item>
 
@@ -143,7 +147,14 @@ const Login = () => {
                 <Button block type="primary" htmlType="submit" loading={isLoading}>
                   Log in
                 </Button>
-                or <a href="">Register now!</a>
+                or{' '}
+                <a
+                  onClick={() => {
+                    navigate(HOME_PATH);
+                  }}
+                >
+                  Register now!
+                </a>
               </Form.Item>
             </Form>
           </div>
