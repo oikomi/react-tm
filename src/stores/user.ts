@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 
 interface UserInfo {
   id: number;
@@ -18,24 +18,30 @@ interface UserState {
 
 export const useUserStore = create<UserState>()(
   devtools(
-    (set) => ({
-      permissions: [],
-      userInfo: {
-        id: 0,
-        username: '',
-        email: '',
-        phone: '',
+    persist(
+      (set) => ({
+        permissions: [],
+        userInfo: {
+          id: 0,
+          username: '',
+          email: '',
+          phone: '',
+        },
+        /** 设置用户信息 */
+        setPermissions: (permissions) => set({ permissions }),
+        /** 设置权限 */
+        setUserInfo: (userInfo) => set({ userInfo }),
+        /** 清除用户信息 */
+        clearInfo: () =>
+          set({
+            userInfo: { id: 0, username: '', email: '', phone: '' },
+          }),
+      }),
+      {
+        name: 'user_storage', // 存储中的项目名称，必须是唯一的
+        storage: createJSONStorage(() => localStorage), // 使用sessionStorage作为存储
       },
-      /** 设置用户信息 */
-      setPermissions: (permissions) => set({ permissions }),
-      /** 设置权限 */
-      setUserInfo: (userInfo) => set({ userInfo }),
-      /** 清除用户信息 */
-      clearInfo: () =>
-        set({
-          userInfo: { id: 0, username: '', email: '', phone: '' },
-        }),
-    }),
+    ),
     {
       enabled: process.env.NODE_ENV === 'development',
       name: 'userStore',

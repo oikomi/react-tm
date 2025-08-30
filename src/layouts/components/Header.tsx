@@ -1,31 +1,63 @@
 import styles from './Header.module.scss';
 import { Dropdown, type MenuProps, Space } from 'antd';
 import Avatar from '@/assets/images/avatar.png';
-import { DownOutlined, LogoutOutlined, ProfileOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+  DownOutlined,
+  ExclamationCircleOutlined,
+  LogoutOutlined,
+  ProfileOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import { Header } from 'antd/es/layout/layout';
 
 import { useCommonStore } from '../../hooks/useCommonStore';
+import { modal } from '@/network/message.ts';
+
+type MenuKey = 'password' | 'logout';
 
 const App = () => {
   const { username } = useCommonStore();
+  const [handleLogout] = useLogout();
 
   console.log('username: ', username);
+
+  const onClick: MenuProps['onClick'] = (e) => {
+    switch (e.key as MenuKey) {
+      case 'logout':
+        onLogout();
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const onLogout = () => {
+    modal.confirm({
+      title: 'confirm',
+      icon: <ExclamationCircleOutlined />,
+      content: 'logout',
+      onOk() {
+        handleLogout();
+      },
+    });
+  };
 
   const items: MenuProps['items'] = [
     {
       key: '2',
-      label: 'Profile',
-      icon: <ProfileOutlined />,
+      label: 'profile',
+      icon: <ProfileOutlined className="mr-1" />,
     },
     {
       key: '3',
-      label: 'Settings',
-      icon: <SettingOutlined />,
+      label: 'settings',
+      icon: <SettingOutlined className="mr-1" />,
     },
     {
-      key: '4',
-      label: 'Logout',
-      icon: <LogoutOutlined />,
+      key: 'logout',
+      label: 'logout',
+      icon: <LogoutOutlined className="mr-1" />,
     },
   ];
   return (
@@ -37,12 +69,12 @@ const App = () => {
 
         {username ? (
           <div className={styles.right}>
-            <Dropdown menu={{ items }}>
+            <Dropdown menu={{ items, onClick }}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
                   <div className="flex items-center">
-                    <img src={Avatar} alt="Avatar" className="" />
-                    <span>{username}</span>
+                    <img src={Avatar} alt="Avatar" className="mr-4 w-8 h-8" />
+                    <span className="ml-2 text-15px min-w-50px truncate">{username}</span>
                   </div>
                   <DownOutlined />
                 </Space>
