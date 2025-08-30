@@ -1,5 +1,5 @@
-import type { LoginData, LoginResult } from '../../models/login';
-import { request } from '../../utils/request.ts';
+import type { LoginData, LoginResult } from '@/models/login';
+import { request } from '@/utils/request.ts';
 
 /**
  * 登录

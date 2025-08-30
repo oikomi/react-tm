@@ -1,9 +1,10 @@
 import { Layout, message } from 'antd';
-import { Content, Footer, Header } from 'antd/es/layout/layout';
+import { Content, Footer } from 'antd/es/layout/layout';
 
-import styles from './Main.module.scss';
+import styles from './index.module.scss';
+import Header from './components/Header';
 
-const Main = () => {
+const App = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   return (
@@ -11,10 +12,7 @@ const Main = () => {
       {contextHolder}
       <div className={styles.container}>
         <Layout>
-          <Header className={styles.header}>
-            <div className={styles.left}>1</div>
-            <div className={styles.right}>2</div>
-          </Header>
+          <Header />
           <Layout className={styles.main}>
             <Content>
               <Outlet />
@@ -30,4 +28,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default App;

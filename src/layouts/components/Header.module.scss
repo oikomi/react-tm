@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: vars.$layout-header;
+  padding: 0 20px;
+  background-color: #e8e8e8;
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-left: 20px;
+    }
+  }
+
+  .right {
+    a {
+      img {
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import { type RouteObject } from 'react-router-dom';
-import Main from '../layouts/Main';
-import Login from '../pages/login';
-import Home from '../pages/home';
-import NotFound from '../pages/404';
+import Index from '@/layouts';
+import Login from '@/pages/login';
+import Home from '@/pages/home';
+import NotFound from '@/pages/404';
 
-import Chat from '../pages/chat';
+import Chat from '@/pages/chat';
 
 //
 export const HOME_PATH = '/';
@@ -14,7 +14,7 @@ export const CHAT_PATH = 'chat';
 const routerConfig: RouteObject[] = [
   {
     path: '/',
-    element: <Main />,
+    element: <Index />,
     children: [
       {
         path: HOME_PATH,

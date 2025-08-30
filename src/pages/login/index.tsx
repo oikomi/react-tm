@@ -1,14 +1,13 @@
-import { setTitle } from '../../utils/helper.ts';
+import { setTitle } from '@/utils/helper.ts';
 
 import { Button, Checkbox, Flex, Form, type FormProps, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import styles from './index.module.scss';
-import { login } from '../../servers/login';
-import type { LoginData } from '../../models/login';
-import { useToken } from '../../hooks/useToken';
-import { HOME_PATH } from '../../router';
-import { decryption } from '../../network/crypto';
+import { login } from '@/servers/login';
+import type { LoginData } from '@/models/login';
+import { useToken } from '@/hooks/useToken';
+import { HOME_PATH } from '@/router';
 
 const CHECK_REMEMBER = 'remember_me';
 const USER_USERNAME = 'login_username';
@@ -18,6 +17,8 @@ const Login = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+
+  const { setPermissions, setUserInfo } = useUserStore((state) => state);
 
   const [getToken, setToken] = useToken();
   const [messageApi, contextHolder] = message.useMessage();
@@ -35,21 +36,21 @@ const Login = () => {
     setClientReady(true);
   }, []);
 
-  useEffect(() => {
-    // 如果存在token，则直接进入页面
-    if (getToken()) {
-      navigate(HOME_PATH);
-    }
-
-    // 如果存在账号密码缓存，则自动填充
-    const username = localStorage.getItem(USER_USERNAME);
-    const password = localStorage.getItem(USER_PASSWORD);
-    if (username && password) {
-      const newPassword = decryption(password);
-      form.setFieldsValue({ username, password: newPassword.value });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   // 如果存在token，则直接进入页面
+  //   if (getToken()) {
+  //     console.log('token exist');
+  //     navigate(HOME_PATH);
+  //   }
+  //
+  //   // 如果存在账号密码缓存，则自动填充
+  //   const username = localStorage.getItem(USER_USERNAME);
+  //   const password = localStorage.getItem(USER_PASSWORD);
+  //   if (username && password) {
+  //     const newPassword = decryption(password);
+  //     form.setFieldsValue({ username, password: newPassword.value });
+  //   }
+  // }, []);
 
   const onFinish = async (values: LoginData) => {
     console.log('Finish:', values);
@@ -75,7 +76,7 @@ const Login = () => {
       //
       setToken(token);
       navigate(HOME_PATH);
-      // setUserInfo(user);
+      setUserInfo(user);
       // setPermissions(permissions);
       // handleGoMenu(permissions);
     } finally {

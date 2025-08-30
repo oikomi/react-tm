@@ -18,6 +18,7 @@ declare global {
   const memo: typeof import('react')['memo']
   const startTransition: typeof import('react')['startTransition']
   const useCallback: typeof import('react')['useCallback']
+  const useCommonStore: typeof import('../src/hooks/useCommonStore')['useCommonStore']
   const useContext: typeof import('react')['useContext']
   const useDebugValue: typeof import('react')['useDebugValue']
   const useDeferredValue: typeof import('react')['useDeferredValue']
@@ -46,6 +47,7 @@ declare global {
   const useToken: typeof import('../src/hooks/useToken')['useToken']
   const useTransition: typeof import('react')['useTransition']
   const useTranslation: typeof import('react-i18next')['useTranslation']
+  const useUserStore: typeof import('../src/stores/user')['useUserStore']
 }
 // for type re-export
 declare global {
